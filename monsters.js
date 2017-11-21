@@ -6,7 +6,7 @@ let monster = {
 monster.modules = {};
 monster.modules.actions = (function () {
 
-	let name = "toto";
+	let name = "Monster";
 	let life = "";
 	let money = "";
 	let awake = "";
@@ -31,7 +31,7 @@ monster.modules.actions = (function () {
 				monster.modules.app.displayStatus(life, money, awake);
 			}
 			else
-				monster.modules.app.log("Monster not enought life");
+				monster.modules.app.log("Monster not enought life or dead");
 		}
 		else
 			monster.modules.app.log("Monster is sleeping");
@@ -39,14 +39,14 @@ monster.modules.actions = (function () {
 	let fight = function () {
 		if(awake == 0)
 		{
-			if(life>=2)
+			if(life>=3)
 			{
 				life = life - 3;
 				monster.modules.app.log("Fighting");
 				monster.modules.app.displayStatus(life, money, awake);
 			}
 			else
-				monster.modules.app.log("Monster not enought life");
+				monster.modules.app.log("Monster not enought life  or dead");
 		}
 		else
 			monster.modules.app.log("Monster is sleeping");
@@ -62,7 +62,7 @@ monster.modules.actions = (function () {
 				monster.modules.app.displayStatus(life, money, awake);
 			}
 			else
-				monster.modules.app.log("Monster not enought life");
+				monster.modules.app.log("Monster not enought life  or dead");
 		}
 		else
 			monster.modules.app.log("Monster is sleeping");
@@ -83,7 +83,7 @@ monster.modules.actions = (function () {
 					monster.modules.app.log("Monster not enought money");
 			}
 			else
-				monster.modules.app.log("Monster not enought life");
+				monster.modules.app.log("Monster not enought life  or dead");
 		}
 		else
 			monster.modules.app.log("Monster is sleeping");
@@ -99,7 +99,7 @@ monster.modules.actions = (function () {
 				setTimeout(function(){ awake=0; life = life + 1; monster.modules.app.log("Waking up"); monster.modules.app.displayStatus(life, money, awake);}, 10000);
 			}
 			else
-				monster.modules.app.log("Monster not enought life");
+				monster.modules.app.log("Monster not enought life  or dead");
 		}
 		else
 			monster.modules.app.log("Monster is sleeping");
@@ -231,19 +231,31 @@ monster.modules.app = (function () {
 		
 		let color ="";
 
-		if(life<=5)
-		    color="red";
-		else if(life<=10)
-		    color="orange";
-		else if(life<=15)
-		    color="blue";
-		else if(life >20)
+		if(life>=70)
 		    color="green";
+		else if(life>=50)
+		    color="blue";
+		else if(life>=20)
+		    color="orange";
 		else
-			color="green";
+		    color="red";
 
 		let etat = document.getElementById("monster");
 		etat.style.backgroundColor = color;
+		etat.style.border = "solid gold";
+
+		if(money>=125)
+		    etat.style.borderWidth = "6px";
+		else if(money>=100)
+		    etat.style.borderWidth = "5px";
+		else if(money>=75)
+		    etat.style.borderWidth = "4px";
+		else if(money>=50)
+		    etat.style.borderWidth = "3px";
+		else if(money>=25)
+		    etat.style.borderWidth = "2px";
+		else
+			etat.style.borderWidth = "1px";
 
 
 	}
