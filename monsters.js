@@ -141,9 +141,14 @@ monster.modules.actions = (function () {
 		monster.modules.app.show();
 		monster.modules.app.log("Le monstre est mort");
 	}
+	let i = 1;
 	let reset = function () {
-		monster.modules.actions.init("test", 100, 100, "0");
+		monster.modules.actions.init("Monster"+ i, 100, 100, "0");
 		monster.modules.app.show();
+		i = i+1;
+	}
+	let getNom = function () {
+		return name;
 	}
 
 	return {
@@ -156,7 +161,8 @@ monster.modules.actions = (function () {
 		sleep,
 		random,
 		kill,
-		reset
+		reset,
+		getNom
 	};
 
 }) ();
@@ -166,7 +172,7 @@ monster.modules.app = (function () {
 
 
 	let start = function () {
-		monster.modules.actions.init("test", 100, 100, 0);
+		monster.modules.actions.init("Monster", 100, 100, 0);
 		monster.modules.app.show();
 		monster.modules.actions.random();
 
@@ -257,6 +263,11 @@ monster.modules.app = (function () {
 		else
 			etat.style.borderWidth = "1px";
 
+		let nom = monster.modules.actions.getNom();
+		let pseudo = document.createElement("p");
+		contenu = document.createTextNode(nom);
+		pseudo.appendChild(contenu);
+		etat.replaceChild(pseudo, etat.childNodes[1]);
 
 	}
 
